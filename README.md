@@ -1,1 +1,1 @@
-# fetch_laboratory
+# Skeleton project for Swagger
