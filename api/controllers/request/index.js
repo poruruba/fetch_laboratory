@@ -19,9 +19,13 @@ exports.handler = async (event, context, callback) => {
     return new Response(response);
   }else
   if( event.path == '/post-urlencoded'){
-    console.log(event.body);
-
+    // Lambda＋API Gatewayの場合はこちら
+    //var body = {};
+    //for( var pair of new URLSearchParams(event.body).entries() ) obj[pair[0]] = pair[1];
+    // swagger_nodeの場合はこちら
     var body = JSON.parse(event.body);
+
+    console.log(event.body);
     var response = {
       path : event.path,
       param: {
