@@ -14,6 +14,7 @@
     "express-session": "^1.15.6",
     "form-data": "^3.0.0",
     "jwt-decode": "^2.2.0",
+    "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
     "swagger-express-mw": "^0.1.0"
   },

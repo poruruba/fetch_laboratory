@@ -5,6 +5,11 @@ var express = require('express');
 var app = express();
 module.exports = app; // for testing
 
+var path = require('path');
+var fs = require('fs');
+var morgan = require('morgan');
+app.use(morgan('tiny', { stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' }) }));
+
 app.use(express.static('public'));
 
 var cors = require('cors');
@@ -137,7 +142,6 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   app.listen(port);
 
   var https = require('https');
-  var fs = require('fs');
   try{
     var options = {
       key:  fs.readFileSync('./cert/server.key'),

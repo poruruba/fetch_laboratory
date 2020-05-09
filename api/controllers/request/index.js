@@ -2,11 +2,11 @@
 
 const HELPER_BASE = process.env.HELPER_BASE || '../../helpers/';
 const Response = require(HELPER_BASE + 'response');
-const Redirect = require(HELPER_BASE + 'redirect');
 
 // Lambda＋API Gatewayの場合に必要
 //const { URLSearchParams } = require('url');
-//const multipart = require('aws-lambda-multipart-parser');
+//const multipart_parser = require('lambda-multipart-parser');
+//const Multipart = require(HELPER_BASE + 'multipart');
 
 exports.handler = async (event, context, callback) => {
   if( event.path == '/post-json'){
@@ -41,11 +41,13 @@ exports.handler = async (event, context, callback) => {
   }else
   if( event.path == '/post-formdata' ){
     // Lambda＋API Gatewayの場合はこちら
-    //var body = multipart.parse(event);
+    // Lambda＋API Gatewayの場合はこちら
+    //var body = await Multipart.parse(multipart_parser, event);
     // swagger_nodeの場合はこちら
     var body = JSON.parse(event.body);
 
     console.log(body);
+
     var response = {
       path : event.path,
       param: {

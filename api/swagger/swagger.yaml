@@ -37,6 +37,35 @@ paths:
   /swagger:
     x-swagger-pipe: swagger_raw
 
+  /download:
+    get:
+      x-swagger-router-controller: routing
+      operationId: upload
+      parameters:
+        - in: query
+          name: param
+          type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            type: file
+
+  /upload:
+    post:
+      x-swagger-router-controller: routing
+      operationId: upload
+      consumes:
+        - multipart/form-data
+      parameters:
+        - in: formData
+          name: upfile
+          type: file
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: "#/definitions/CommonResponse"
 
   /node:
     post:

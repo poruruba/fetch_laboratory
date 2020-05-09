@@ -1,6 +1,6 @@
 'use strict';
 
-const { func_table, alexa_table, lambda_table, express_table, binary_table } = require('./functions.js');
+const { func_table, alexa_table, lambda_table, express_table } = require('./functions.js');
 
 var exports_list = {};
 for( var operationId in func_table ){
@@ -19,10 +19,10 @@ for( var operationId in express_table ){
 module.exports = exports_list;
 
 function routing(req, res) {
-//    console.log(req);
+    console.log(req);
 
     var operationId = req.swagger.operation.operationId;
-    console.log('[' + req.path + '(' + operationId + ') calling]');
+    console.log('[' + req.path + ' calling]');
 
     try{
         var event;
@@ -36,7 +36,8 @@ function routing(req, res) {
                 queryStringParameters: req.query,
                 stage: req.swagger.swaggerObject.basePath.replace( /^\/|\/$/g, ""),
                 Host: req.hostname,
-                requestContext: ( req.requestContext ) ? req.requestContext : {}
+                requestContext: ( req.requestContext ) ? req.requestContext : {},
+                files: req.files,
             };
 
             func = func_table[operationId];
@@ -148,8 +149,8 @@ function return_response(res, ret){
     if (!res.get('Content-Type'))
         res.type('application/json');
 
-    if( binary_table.indexOf(res.get('Content-Type')) >= 0 ){
-        var bin = new Buffer(ret.body, 'base64')
+    if( ret.isBase64Encoded ){
+        var bin = Buffer.from(ret.body, 'base64')
         res.send(bin);
     }else{
         if( res.func_type == 'alexa'){

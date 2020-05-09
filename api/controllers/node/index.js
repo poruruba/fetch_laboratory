@@ -5,8 +5,8 @@ const Response = require(HELPER_BASE + 'response');
 const Redirect = require(HELPER_BASE + 'redirect');
 
 const FormData = require('form-data');
-const fetch = require('node-fetch');
 const { URL, URLSearchParams } = require('url');
+const fetch = require('node-fetch');
 const Headers = fetch.Headers;
 
 const baseurl = 'http://localhost:10080';

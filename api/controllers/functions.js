@@ -6,6 +6,7 @@ const func_table = {
 //  "test-dialogflow" : require('./test_dialogflow').fulfillment,
 "request" : require('./request').handler,
 "node" : require('./node').handler,
+"upload" : require('./upload').handler,
 };
 const alexa_table = {
 //  "test-alexa" : require('./test_alexa').handler,
@@ -18,11 +19,5 @@ const lambda_table = {
 const express_table = {
 //  "test-express": require('./test-express').handler,
 };
-/* ここまで */
 
-/* 必要に応じて、バイナリレスポンスのContent-Typeを以下に追加する */
-const binary_table = [
-//  'application/octet-stream',
-];
-
-module.exports = { func_table, alexa_table, lambda_table, express_table, binary_table };
+module.exports = { func_table, alexa_table, lambda_table, express_table };
