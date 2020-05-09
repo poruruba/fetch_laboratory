@@ -33,6 +33,7 @@ exports.handler = async (event, context, callback) => {
     var binary = [];
     for( var i = 0 ; i < 256 ; i++ )
       binary[i] = i;
+    
     var response = new BinResponse("application/octet-stream", Buffer.from(binary));
     response.set_filename("output.bin");
     return response;
